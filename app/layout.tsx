@@ -84,3 +84,38 @@ export default function RootLayout({
  *
  * Since this is a hook, you need to indicate that the hook is a client component
  */
+
+/** FETCHING DATA
+ *
+ * One way to take internal data and show it is by using hardcoded data (right in your code), but that's not
+ * simply a good way to persist it. You need a database.
+ *
+ * But you can't just fetch data from your frontend... That would expose sensitive data!
+ *
+ * Here's where APIs come into play. It's an intermediary layer between the application data and
+ * our database. These are some cases where you'd prefer to use an API:
+ *
+ * 1. You're using 3rd party services that PROVIDE an API
+ * 2. You're fetching data from the client-side. You can't just make queries from the client side!
+ * You need some extra layer for making those queries
+ */
+
+/** MORE ABOUT SERVER COMPONENTS
+ *
+ * Reember that Next.js use server components by default. With these server components, we can fetch
+ * data directly to the database. This might be a new approach, and has some benefits:
+ *
+ * 1. They support promises. This means you can use async/await without reaching for useEffect, useState
+ * or other fetching libraries (such as axios)
+ * 2. Since these server components are rendered on the server, the expensive data fetches and logic is kept on the
+ * server and NOT on the client. We only send the result to the client. That's it.
+ * 3. You can query to the database WITHOUT an additional API layer
+ */
+
+/** WHY SQL
+ *
+ * We're using SQL in this case, but why?
+ * 1. It's the industry standard for querying relational databases
+ * 2. It helps you to buttress your relational databases fundamentals, which
+ * are transferrable to other tools that use SQL as well.
+ */
