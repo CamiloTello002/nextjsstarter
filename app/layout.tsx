@@ -129,3 +129,61 @@ export default function RootLayout({
  * It wouldn't be efficient to sort the invoices in-memory. It's a better
  * option to use an SQL query to fetch only the latest 5 invoices
  */
+
+/** WE NEED TO BE AWARE OF REQUEST WATERFALLS!
+ *
+ * A waterfall refers to a sequence of network requests that DEPEND on the completion
+ * of PREVIOUS requests.
+ *
+ * In our case of data fetching, each request can only begin once the previous request
+ * has returned data
+ *
+ * We need for fetchRevenue() to complete before fetchLatestInvoices() start.
+ *
+ * Request waterfalls are not bad per se. In fact, they're useful when you need
+ * a request to fulfill a condition before you make another request.
+ * Example: you might want to fetch a user's ID and profile information first.
+ * Once you have the ID, you can now fetch their list of friends.
+ * This is the case because fetching the list of friends DEPENDS on the
+ * result of a previous request
+ *
+ * But, in cases where the requests don't depend on each other, you can
+ * make parallel requests, which is WAY more efficient.
+ *
+ * In JavaScript, you can use the Promise.all() and Promise.allSettled() to
+ * achieve this functionality. Besides, you can use this JavaScript pattern
+ * with any library or framework.
+ */
+
+/** STATIC AND DYNAMIC RENDERING
+ *
+ * Remembering about the dashboard setup, there are two limitations:
+ * 1. The data requests are creating an unintentional waterfall.
+ * 2. Any data updates on the dashboard are NOT reflected on our application
+ *
+ * Static rendering?
+ * Data fetching and rendering only happens on the server at BUILD time
+ * This means that when a user visits your application, the cached result
+ * is served. This has a couple of benefits:
+ * 1. faster website
+ * 2. server load is reduced.
+ * 3. improved SEO
+ * But remember!!! This static rendering is ONLY useful for UI with NO DATA
+ * or data that is shared across users (such as blog posts or product pages)
+ * Not a good idea for a dashboard that has personalized data that is regularly
+ * updated though...
+ *
+ * Dynamic rendering?
+ * The content is rendered on the server for each user at REQUEST TIME
+ * Simply put, when the user visits the page
+ *
+ * Some of the benefits are:
+ * 1. you can display real-time data or frequently updated data
+ * 2. Better for personalized content, such as user profiles and
+ * data based on user interactions
+ * 3. You can access information that is only known at request time
+ * (such as cookies or url search parameters)
+ *
+ * Slow data fetchings...
+ * what happens if one data request is slower than all the others?
+ */
