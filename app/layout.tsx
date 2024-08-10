@@ -209,7 +209,10 @@ export default function RootLayout({
  * What you have to do is to wrap dynamic components in <Suspense>, then, pass
  * it a fallback component to show while the dynamic component loads
  *
- * In our specific case, we can
+ * Remember, don't let the page do the heavy work. If you let the page
+ * do the heavy load, it will still show the loading UI
+ * For just giving the heavy load and streaming the results on a component,
+ * delegate the heave load to the COMPONENT, not the page
  */
 
 /** ROUTE GROUPS
@@ -224,4 +227,20 @@ export default function RootLayout({
  *
  * But we can also use it to separate our application into sections
  * Say, (marketing) routes and (shop) routes
+ */
+
+/** GROUPING COMPONENTS
+ * We could add a suspense wrapper for a group of components that need
+ * to fetch their own data separately. The downside of doing so is that we'd get a popping
+ * effect (it's just annoying).
+ *
+ * So, what we can do is to group them together and add the suspense component
+ * to the group instead of every single component
+ */
+
+/** WHERE SHOULD SUSPENSE BOUNDARIES GO?
+ * Depends on:
+ * - How you want the user to experience the page as it streams
+ * - The content you decide to prioritize
+ * - Whether the component rely on data fetching
  */
