@@ -202,4 +202,26 @@ export default function RootLayout({
  *
  * Two ways for implementing streaming: loading.tsx file for the page
  * and <Suspense> for a specific component
+ *
+ * Streaming components???
+ * Yes, you can defer rendering parts of the application until some condition
+ * is met (data is loaded, for instance).
+ * What you have to do is to wrap dynamic components in <Suspense>, then, pass
+ * it a fallback component to show while the dynamic component loads
+ *
+ * In our specific case, we can
+ */
+
+/** ROUTE GROUPS
+ *
+ * We can organize files into logical groups with route groups
+ * It won't affect the URL path structure. This means that the name inside
+ * parentheses WON'T be included in the URL path
+ *
+ * Why would we use route groups in this case?
+ * For ensuring that loading.tsx fallback UI ONLY applies to the dashboard
+ * overview page!
+ *
+ * But we can also use it to separate our application into sections
+ * Say, (marketing) routes and (shop) routes
  */
