@@ -186,4 +186,20 @@ export default function RootLayout({
  *
  * Slow data fetchings...
  * what happens if one data request is slower than all the others?
+ * Well, we depend on that data fetching.
+ * This means that our application is AS FAST AS OUR SLOWEST DATA FETCH
+ */
+
+/** STREAMING
+ * it's a data transfer technique.
+ * This allows us to break down a route into smaller chunks and progressively
+ * stream them from the server to the client AS they become ready
+ *
+ *
+ * This is good for preventing slow data requests from blocking our whole page.
+ * it's good for allowing the user to see and interact with parts of the page
+ * without waiting for all the data to be available
+ *
+ * Two ways for implementing streaming: loading.tsx file for the page
+ * and <Suspense> for a specific component
  */
