@@ -118,4 +118,14 @@ export default function RootLayout({
  * 1. It's the industry standard for querying relational databases
  * 2. It helps you to buttress your relational databases fundamentals, which
  * are transferrable to other tools that use SQL as well.
+ *
+ * Fetching data and sorting it...
+ * Let's say we want the latest 5 invoices. We could just fetch
+ * all the invoices from our database and sort through them with
+ * JavaScript. The problem here is that if our data is HUGE, it'd
+ * SLOW DOWN our application performance; the amount of data transferred on
+ * each request is HUGE, as well as the amount of JavaScript needed for it.
+ *
+ * It wouldn't be efficient to sort the invoices in-memory. It's a better
+ * option to use an SQL query to fetch only the latest 5 invoices
  */
